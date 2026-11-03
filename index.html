@@ -861,7 +861,7 @@ header.scrolled {
 
 @media (max-width: 768px) {
   .candy-hero-swiper { 
-    min-height: 420px; /* Reduced from 750px to take a professional, compact amount of the mobile screen */
+    min-height: 120px; /* Reduced from 750px to take a professional, compact amount of the mobile screen */
     height: auto; 
   }
   .candy-hero-swiper .swiper-button-next, .candy-hero-swiper .swiper-button-prev { display: none; }
@@ -2359,6 +2359,430 @@ window.AURERIA_CANDY_PRODUCTS = (typeof __AURERIA_CANDY_PRODUCTS_PLACEHOLDER__ !
       font-size: 8px;
     }
   }
+ /* ===== ULTIMATE MOBILE-OPTIMIZED BOX BUILDER ===== */
+.premium-box-builder {
+  background: linear-gradient(180deg, var(--soft) 0%, #ffffff 100%);
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+  position: relative;
+  overflow: hidden;
+}
+.premium-box-builder::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(217, 119, 6, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.builder-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  padding: 0 var(--container-padding);
+  position: relative;
+  z-index: 2;
+}
+.builder-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: linear-gradient(135deg, rgba(6, 78, 59, 0.1), rgba(217, 119, 6, 0.1));
+  color: var(--primary); padding: 0.4rem 1rem; border-radius: 50px;
+  font-weight: 700; font-size: clamp(0.7rem, 2.5vw, 0.8rem); margin-bottom: 0.75rem;
+  border: 1px solid rgba(6, 78, 59, 0.15); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.builder-header h2 {
+  font-family: var(--font-display); font-size: clamp(1.75rem, 6vw, 2.5rem);
+  color: var(--black); margin-bottom: 0.5rem; line-height: 1.15;
+}
+.builder-header p { color: var(--mid-gray); font-size: clamp(0.85rem, 3vw, 1rem); line-height: 1.5; }
+.selection-progress {
+  margin-top: 1.25rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.progress-track {
+  width: 100%; max-width: 280px; height: 6px; background: #e2e8f0;
+  border-radius: 10px; overflow: hidden; position: relative;
+}
+.progress-fill {
+  height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--gold));
+  border-radius: 10px; transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 10px rgba(217, 119, 6, 0.4);
+}
+.progress-text { font-weight: 700; color: var(--primary); font-size: clamp(0.75rem, 2.5vw, 0.85rem); }
+
+/* Premium Flavor Grid — Mobile-First 2-Column */
+.flavor-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Force 2 columns on mobile */
+  gap: clamp(0.6rem, 2vw, 1rem);
+  margin-bottom: 2rem;
+  padding: 0 var(--container-padding);
+  position: relative;
+  z-index: 2;
+}
+@media (min-width: 600px) {
+  .flavor-grid-premium { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+.flavor-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: clamp(0.8rem, 3vw, 1.25rem);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  -webkit-tap-highlight-color: transparent;
+}
+.flavor-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(217, 119, 6, 0.08), transparent);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.flavor-card:active { transform: scale(0.96); }
+.flavor-card.selected {
+  border-color: var(--gold);
+  background: rgba(251, 191, 36, 0.1);
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.25), 0 8px 20px rgba(217, 119, 6, 0.15);
+  transform: translateY(-2px);
+}
+.flavor-check {
+  position: absolute; top: 8px; right: 8px; width: 24px; height: 24px;
+  background: var(--gold); color: var(--primary-dark); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 0.7rem;
+  transform: scale(0); opacity: 0; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 3;
+}
+.flavor-card.selected .flavor-check { transform: scale(1); opacity: 1; }
+.flavor-emoji { font-size: clamp(1.8rem, 6vw, 2.5rem); margin-bottom: 0.25rem; display: block; transition: transform 0.3s ease; }
+.flavor-card.selected .flavor-emoji { animation: bounce 0.5s ease; }
+.flavor-name {
+  font-family: var(--font-display); font-weight: 700; color: var(--black);
+  font-size: clamp(0.75rem, 2.5vw, 0.9rem); line-height: 1.2; margin-bottom: 0.15rem;
+}
+.flavor-hint { font-size: clamp(0.65rem, 2vw, 0.75rem); color: var(--mid-gray); font-weight: 500; }
+
+/* Builder Stage & 3D Box — Scaled for Mobile */
+.builder-stage {
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 0; position: relative; z-index: 2;
+  transition: min-height 0.4s ease;
+  padding: 0 var(--container-padding);
+}
+.builder-stage.active { min-height: 380px; }
+.animation-stage {
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  padding: 1.5rem 1rem; perspective: 1000px; width: 100%;
+}
+.animation-stage.active { display: flex; animation: fadeInStage 0.5s ease; }
+.box-3d {
+  width: 120px; height: 120px; position: relative;
+  transform-style: preserve-3d; transform: rotateX(-20deg) rotateY(30deg);
+  transition: transform 1s ease;
+}
+.box-face {
+  position: absolute; width: 120px; height: 120px;
+  background: linear-gradient(135deg, #064e3b, #022c22);
+  border: 1px solid rgba(251, 191, 36, 0.3); box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}
+.box-front  { transform: translateZ(60px); }
+.box-back   { transform: rotateY(180deg) translateZ(60px); }
+.box-left   { transform: rotateY(-90deg) translateZ(60px); }
+.box-right  { transform: rotateY(90deg) translateZ(60px); }
+.box-bottom { transform: rotateX(-90deg) translateZ(60px); background: #022c22; }
+.box-lid-3d {
+  position: absolute; width: 124px; height: 124px; top: -2px; left: -2px;
+  transform-style: preserve-3d; transform: rotateX(90deg) translateZ(60px);
+  transform-origin: top; transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s;
+}
+.lid-top {
+  position: absolute; width: 124px; height: 124px;
+  background: linear-gradient(135deg, #d97706, #b45309);
+  border: 1px solid rgba(251, 191, 36, 0.5); transform: translateZ(0);
+}
+.lid-front {
+  position: absolute; width: 124px; height: 18px; background: #b45309;
+  transform: rotateX(-90deg) translateZ(62px); transform-origin: top;
+}
+.ribbon-3d {
+  position: absolute; background: linear-gradient(90deg, #fbbf24, #f59e0b, #fbbf24);
+  z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.ribbon-v { width: 20px; height: 0%; left: 50px; top: 0; transform: translateZ(61px); transition: height 0.6s ease 1s; }
+.ribbon-h { width: 0%; height: 20px; top: 50px; left: 0; transform: translateZ(61px); transition: width 0.6s ease 1.2s; }
+.bow-3d {
+  position: absolute; top: -8px; left: 50%;
+  transform: translateX(-50%) translateZ(62px) scale(0); z-index: 11;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.6s;
+}
+.bow-loop {
+  position: absolute; width: 26px; height: 26px; border: 5px solid #fbbf24;
+  border-radius: 50% 50% 0 50%; top: 0;
+}
+.bow-loop.left { left: -22px; transform: rotate(-45deg); }
+.bow-loop.right { right: -22px; transform: rotate(135deg); border-radius: 50% 50% 50% 0; }
+.bow-knot {
+  position: absolute; width: 14px; height: 14px; background: #f59e0b;
+  border-radius: 50%; left: -7px; top: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.glow-effect {
+  position: absolute; width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.4) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(-50px);
+  opacity: 0; transition: opacity 0.5s ease 1.5s;
+}
+.box-3d.wrapping .box-lid-3d { transform: rotateX(0deg) translateZ(60px); }
+.box-3d.wrapping .ribbon-v { height: 120px; }
+.box-3d.wrapping .ribbon-h { width: 120px; }
+.box-3d.wrapping .bow-3d { transform: translateX(-50%) translateZ(62px) scale(1); }
+.box-3d.wrapping .glow-effect { opacity: 1; animation: pulseGlow 2s ease-in-out infinite; }
+.stage-text {
+  text-align: center; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.4rem;
+}
+.text-line-1, .text-line-2 {
+  font-family: var(--font-display); font-size: clamp(1rem, 4vw, 1.25rem); color: var(--primary);
+  font-weight: 700; opacity: 0; transform: translateY(10px);
+}
+.box-3d.wrapping ~ .stage-text .text-line-1 { animation: fadeInUp 0.5s ease 0.8s forwards; }
+.box-3d.wrapping ~ .stage-text .text-line-2 { animation: fadeInUp 0.5s ease 1.4s forwards; color: var(--accent); }
+
+/* Premium Summary — No Squeezing */
+.box-summary-premium {
+  text-align: center; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
+  padding: clamp(1.25rem, 5vw, 2.5rem); border-radius: 20px;
+  box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.3); width: 100%; max-width: 100%;
+  animation: slideUpPremium 0.6s cubic-bezier(0.16, 1, 0.3, 1); position: relative;
+  box-sizing: border-box;
+}
+.box-summary-premium.fly-up {
+  animation: flyUpAndShrink 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+@keyframes flyUpAndShrink {
+  0% { transform: scale(1) translateY(0); opacity: 1; }
+  100% { transform: scale(0.6) translateY(-150px); opacity: 0; }
+}
+.summary-icon { font-size: clamp(2rem, 8vw, 3rem); color: var(--green); margin-bottom: 0.75rem; animation: bounce 0.8s ease; }
+.box-summary-premium h3 {
+  font-family: var(--font-display); font-size: clamp(1.1rem, 4vw, 1.5rem);
+  color: var(--black); margin-bottom: 1rem; line-height: 1.3;
+}
+.flavor-pills {
+  display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+}
+.flavor-pill {
+  background: linear-gradient(135deg, var(--soft), #ffffff); color: var(--primary);
+  padding: 0.5rem 0.9rem; border-radius: 50px; font-weight: 700;
+  font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+  border: 1px solid rgba(6, 78, 59, 0.2); box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex; align-items: center; gap: 0.35rem; max-width: 100%;
+}
+.price-display {
+  background: var(--black); color: var(--white); padding: 0.85rem 1.5rem;
+  border-radius: 14px; display: inline-flex; flex-direction: column; margin-bottom: 1.25rem;
+  min-width: 160px;
+}
+.price-label { font-size: 0.75rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
+.price-value { font-family: var(--font-display); font-size: clamp(1.5rem, 6vw, 2rem); font-weight: 800; color: var(--gold); }
+.summary-actions {
+  display: flex; flex-direction: column; gap: 0.75rem; justify-content: center;
+}
+@media (min-width: 480px) {
+  .summary-actions { flex-direction: row; flex-wrap: wrap; }
+}
+.btn-premium {
+  padding: 0.9rem 1rem; border-radius: 12px; font-weight: 700;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 48px; font-family: var(--font-body); text-decoration: none;
+  width: 100%;
+}
+@media (min-width: 480px) {
+  .btn-premium { flex: 1; min-width: 140px; width: auto; }
+}
+.btn-premium.primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--white);
+  box-shadow: 0 6px 18px rgba(6, 78, 59, 0.3);
+}
+.btn-premium.primary:active { transform: scale(0.98); }
+.btn-premium.whatsapp {
+  background: linear-gradient(135deg, #25d366, #128c7e); color: var(--white);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
+}
+.btn-premium.whatsapp:active { transform: scale(0.98); }
+.btn-premium.secondary {
+  background: var(--white); color: var(--mid-gray); border: 2px solid #e2e8f0;
+}
+.btn-premium.secondary:active { transform: scale(0.98); border-color: var(--primary); color: var(--primary); }
+
+/* ===== MOBILE-OPTIMIZED CUSTOM BUILDS ORDER SECTION ===== */
+.custom-builds-order-section {
+  background: linear-gradient(180deg, #ffffff 0%, var(--soft) 100%);
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+  border-top: 3px solid var(--gold);
+  position: relative;
+}
+.custom-builds-order-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(217, 119, 6, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+.order-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  padding: 0 var(--container-padding);
+  position: relative;
+  z-index: 2;
+}
+.order-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: linear-gradient(135deg, rgba(6, 78, 59, 0.1), rgba(217, 119, 6, 0.1));
+  color: var(--primary); padding: 0.4rem 1rem; border-radius: 50px;
+  font-weight: 700; font-size: clamp(0.7rem, 2.5vw, 0.8rem); margin-bottom: 0.75rem;
+  border: 1px solid rgba(6, 78, 59, 0.15); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.order-header h2 {
+  font-family: var(--font-display); font-size: clamp(1.5rem, 6vw, 2.5rem);
+  color: var(--black); margin-bottom: 0.5rem; line-height: 1.2;
+}
+.order-header p { color: var(--mid-gray); font-size: clamp(0.85rem, 3vw, 1rem); line-height: 1.5; }
+.order-layout {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 var(--container-padding);
+  position: relative; z-index: 2;
+}
+.order-boxes-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.order-box-card {
+  display: flex; align-items: center; gap: 0.85rem;
+  background: var(--white); padding: 1rem;
+  border-radius: 14px; border: 1px solid rgba(6, 78, 59, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.3s ease;
+  animation: slideInLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+.order-box-emojis {
+  font-size: 1.6rem; flex-shrink: 0; background: var(--soft);
+  width: 50px; height: 50px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 0.2rem;
+}
+.order-box-details { flex: 1; min-width: 0; }
+.order-box-name {
+  font-family: var(--font-display); font-weight: 700; color: var(--black);
+  font-size: clamp(0.85rem, 3vw, 1rem); margin-bottom: 0.15rem;
+}
+.order-box-flavors {
+  font-size: clamp(0.7rem, 2.5vw, 0.85rem); color: var(--mid-gray);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.order-box-price {
+  font-weight: 800; color: var(--primary);
+  font-size: clamp(0.95rem, 3vw, 1.1rem); flex-shrink: 0;
+}
+.order-remove-btn {
+  background: none; border: none; color: #ef4444; cursor: pointer;
+  padding: 0.4rem; border-radius: 50%; transition: all 0.2s ease;
+  flex-shrink: 0; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+}
+.order-remove-btn:active { background: #fee2e2; transform: scale(0.9); }
+.order-preference-panel { display: flex; flex-direction: column; gap: 1rem; }
+.preference-card, .order-total-card {
+  background: var(--white); padding: 1.25rem;
+  border-radius: 14px; border: 1px solid rgba(6, 78, 59, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.preference-card h3 {
+  font-family: var(--font-display); font-size: clamp(0.95rem, 3vw, 1.1rem);
+  color: var(--black); margin-bottom: 0.85rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.preference-card h3 i { color: var(--primary); }
+.preference-options { display: flex; flex-direction: column; gap: 0.6rem; }
+.preference-option { display: flex; cursor: pointer; position: relative; }
+.preference-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+.preference-content {
+  display: flex; align-items: center; gap: 0.85rem; padding: 0.85rem;
+  border: 2px solid #e2e8f0; border-radius: 10px; width: 100%;
+  transition: all 0.3s ease;
+}
+.preference-content i { font-size: 1.3rem; color: var(--mid-gray); transition: color 0.3s ease; }
+.preference-content strong { display: block; color: var(--black); font-size: clamp(0.85rem, 2.5vw, 0.95rem); }
+.preference-content span { font-size: clamp(0.7rem, 2vw, 0.8rem); color: var(--mid-gray); }
+.preference-option input:checked + .preference-content { border-color: var(--primary); background: var(--soft); }
+.preference-option input:checked + .preference-content i { color: var(--primary); }
+.order-total-card .total-row {
+  display: flex; justify-content: space-between; padding: 0.4rem 0;
+  color: var(--mid-gray); font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+}
+.order-total-card .total-row.grand {
+  border-top: 2px solid rgba(6, 78, 59, 0.15); margin-top: 0.4rem; padding-top: 0.75rem;
+  font-weight: 800; color: var(--black); font-size: clamp(0.95rem, 3vw, 1.1rem);
+}
+.order-total-card .total-row.grand span:last-child {
+  color: var(--primary); font-size: clamp(1.2rem, 5vw, 1.4rem); font-family: var(--font-display);
+}
+.whatsapp-order-btn {
+  width: 100%; background: linear-gradient(135deg, #25d366, #128c7e); color: var(--white);
+  border: none; padding: 1rem; border-radius: 12px; font-weight: 700;
+  font-size: clamp(0.9rem, 3vw, 1.05rem); cursor: pointer; transition: all 0.3s ease;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  min-height: 52px; box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3); font-family: var(--font-body);
+}
+.whatsapp-order-btn:active { transform: scale(0.98); }
+.clear-builds-btn {
+  width: 100%; background: transparent; color: #ef4444; border: 2px solid #ef4444;
+  padding: 0.85rem; border-radius: 12px; font-weight: 600;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem); cursor: pointer; transition: all 0.3s ease;
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: var(--font-body);
+}
+.clear-builds-btn:active { background: #ef4444; color: var(--white); }
+
+/* ===== TINY SCREEN FIXES (320px - 360px) ===== */
+@media (max-width: 360px) {
+  .flavor-grid-premium { gap: 0.5rem; }
+  .flavor-card { min-height: 100px; padding: 0.6rem 0.4rem; }
+  .flavor-emoji { font-size: 1.6rem; }
+  .builder-stage.active { min-height: 340px; }
+  .box-3d { width: 100px; height: 100px; }
+  .box-face { width: 100px; height: 100px; }
+  .box-front  { transform: translateZ(50px); }
+  .box-back   { transform: rotateY(180deg) translateZ(50px); }
+  .box-left   { transform: rotateY(-90deg) translateZ(50px); }
+  .box-right  { transform: rotateY(90deg) translateZ(50px); }
+  .box-bottom { transform: rotateX(-90deg) translateZ(50px); }
+  .box-lid-3d { width: 104px; height: 104px; transform: rotateX(90deg) translateZ(50px); }
+  .lid-top { width: 104px; height: 104px; }
+  .lid-front { width: 104px; height: 16px; transform: rotateX(-90deg) translateZ(52px); }
+  .ribbon-v { width: 18px; left: 41px; transform: translateZ(51px); }
+  .ribbon-h { height: 18px; top: 41px; transform: translateZ(51px); }
+  .box-3d.wrapping .ribbon-v { height: 100px; }
+  .box-3d.wrapping .ribbon-h { width: 100px; }
+  .bow-3d { transform: translateX(-50%) translateZ(52px) scale(0); }
+  .bow-loop { width: 22px; height: 22px; border-width: 4px; }
+  .bow-loop.left { left: -18px; }
+  .bow-loop.right { right: -18px; }
+  .bow-knot { width: 12px; height: 12px; left: -6px; top: 5px; }
+  .box-3d.wrapping .bow-3d { transform: translateX(-50%) translateZ(52px) scale(1); }
+  .glow-effect { width: 150px; height: 150px; }
+  .box-3d.wrapping .box-lid-3d { transform: rotateX(0deg) translateZ(50px); }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+@keyframes fadeInStage { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideUpPremium { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulseGlow { 0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) translateZ(-50px) scale(1); } 50% { opacity: 0.8; transform: translate(-50%, -50%) translateZ(-50px) scale(1.1); } }
 </style>
 <a href="https://hivetimes.co.za" class="hive-badge-link" target="_blank" rel="noopener" title="Visit Hive Times">
   <svg class="hive-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -2537,7 +2961,147 @@ window.AURERIA_CANDY_PRODUCTS = (typeof __AURERIA_CANDY_PRODUCTS_PLACEHOLDER__ !
     <div class="swiper-button-prev"></div>
   </div>
 </section>
+<!-- ========== WORLD-CLASS CUSTOM BOX BUILDER (MULTI-BOX) ========== -->
+<section class="premium-box-builder" id="box-builder">
+   <!-- Builder Stage (3D Box & Summary appear below the flavors) -->
+    <div class="builder-stage" id="builderStage" aria-hidden="true">
+      
+      <!-- 3D Box Animation -->
+      <div class="animation-stage" id="animationStage">
+        <div class="box-3d" id="box3d">
+          <div class="box-face box-front"></div>
+          <div class="box-face box-back"></div>
+          <div class="box-face box-left"></div>
+          <div class="box-face box-right"></div>
+          <div class="box-face box-bottom"></div>
+          <div class="box-lid-3d" id="boxLid">
+            <div class="lid-top"></div>
+            <div class="lid-front"></div>
+          </div>
+          <div class="ribbon-3d ribbon-v"></div>
+          <div class="ribbon-3d ribbon-h"></div>
+          <div class="bow-3d">
+            <div class="bow-loop left"></div>
+            <div class="bow-loop right"></div>
+            <div class="bow-knot"></div>
+          </div>
+          <div class="glow-effect"></div>
+        </div>
+        <div class="stage-text">
+          <span class="text-line-1">Crafting your masterpiece...</span>
+          <span class="text-line-2">Sealing with premium care</span>
+        </div>
+      </div>
 
+      <!-- Success Summary -->
+      <div class="box-summary-premium" id="boxSummary" style="display: none;">
+        <div class="summary-icon"><i class="fas fa-check-circle"></i></div>
+        <h3>Your Custom Box is Ready!</h3>
+        <div class="flavor-pills" id="flavorPills"></div>
+        <div class="price-display">
+          <span class="price-label">Total per Box</span>
+          <span class="price-value">R75.00</span>
+        </div>
+        <div class="summary-actions">
+          <button class="btn-premium primary" onclick="addCustomBoxToCart()">
+            <i class="fas fa-shopping-bag"></i> Add to Cart
+          </button>
+          <a href="#" class="btn-premium whatsapp" id="directWhatsappBtn" target="_blank" rel="noopener">
+            <i class="fab fa-whatsapp"></i> Order via WhatsApp
+          </a>
+          <button class="btn-premium secondary" onclick="buildAnotherBox()">
+            <i class="fas fa-plus-circle"></i> Build Another Box
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="builder-header">
+      <span class="builder-badge"><i class="fas fa-magic"></i> Custom Creation</span>
+      <h2>Box It Up!</h2>
+      <p>Curate your perfect mix. Select exactly <strong>2 flavours</strong> to build your premium custom box.</p>
+      
+      <div class="selection-progress">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-text" id="progressText">0 / 2 Flavours Selected</span>
+      </div>
+    </div>
+    
+   
+    
+    <!-- Flavor Grid (Always stays on top / visible) -->
+    <div class="flavor-grid-premium" id="flavorGrid">
+      <!-- Flavors injected via JS -->
+    </div>
+
+   
+</section>
+<!-- ========== CUSTOM BUILDS ORDER SECTION (BOTTOM) ========== -->
+<section class="custom-builds-order-section" id="customBuildsOrder" style="display: none;">
+  <div class="container">
+    <div class="order-header">
+      <span class="order-badge"><i class="fas fa-layer-group"></i> Your Custom Builds</span>
+      <h2>Review Your Boxes</h2>
+      <p>Below is a summary of all the custom boxes you've built. Choose your order preference and send your order directly via WhatsApp.</p>
+    </div>
+
+    <div class="order-layout">
+      <!-- Left: Boxes List -->
+      <div class="order-boxes-list" id="orderBoxesList"></div>
+
+      <!-- Right: Order Preference & WhatsApp -->
+      <div class="order-preference-panel">
+        <div class="preference-card">
+          <h3><i class="fas fa-store"></i> Order Preference</h3>
+          <div class="preference-options">
+            <label class="preference-option">
+              <input type="radio" name="buildOrderType" value="Collection" checked>
+              <div class="preference-content">
+                <i class="fas fa-store"></i>
+                <div>
+                  <strong>Collection</strong>
+                  <span>Pick up from our store</span>
+                </div>
+              </div>
+            </label>
+            <label class="preference-option">
+              <input type="radio" name="buildOrderType" value="Delivery">
+              <div class="preference-content">
+                <i class="fas fa-truck"></i>
+                <div>
+                  <strong>Delivery</strong>
+                  <span>Delivered to your door</span>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="order-total-card">
+          <div class="total-row">
+            <span>Total Boxes:</span>
+            <span id="totalBoxesCount">0</span>
+          </div>
+          <div class="total-row grand">
+            <span>Order Total:</span>
+            <span id="totalBoxesPrice">R0.00</span>
+          </div>
+        </div>
+
+        <button class="whatsapp-order-btn" onclick="sendBuildsOrderWhatsApp()">
+          <i class="fab fa-whatsapp"></i>
+          <span>Send Order via WhatsApp</span>
+        </button>
+        <button class="clear-builds-btn" onclick="clearAllBuilds()">
+          <i class="fas fa-trash-alt"></i> Clear All Builds
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- Search & Filter Bar -->
 <div class="search-filter-bar" id="searchFilterBar">
   <div class="search-filter-container">
@@ -3293,6 +3857,282 @@ document.addEventListener('DOMContentLoaded', function() {
     a11y: { prevSlideMessage: 'Previous slide', nextSlideMessage: 'Next slide' }
   });
 });
+// ===== ULTIMATE MOBILE-OPTIMIZED BOX BUILDER =====
+const boxFlavorsData = [
+  { name: "Strawberry bubblegum", emoji: "🍓", hint: "Sweet & Classic" },
+  { name: "Sour strawberry bubblegum", emoji: "🍓⚡", hint: "Tangy Kick" },
+  { name: "Cherry bubblegum", emoji: "🍒", hint: "Rich & Bold" },
+  { name: "Sour Cherry bubblegum", emoji: "🍒⚡", hint: "Zesty Punch" },
+  { name: "Cotton candy bubblegum", emoji: "🍬", hint: "Dreamy Sweet" },
+  { name: "Sour cotton Candy bubblegum", emoji: "🍬⚡", hint: "Electric Sweet" },
+  { name: "Blue raspberry", emoji: "🫐", hint: "Cool & Crisp" },
+  { name: "Sour blue raspberry", emoji: "🫐⚡", hint: "Sharp & Refreshing" },
+  { name: "Passion Raspberry", emoji: "🥭", hint: "Tropical Fusion" }
+];
+
+let selectedBoxFlavors = [];
+let completedBoxes = [];
+let buildTimeout = null;
+
+const flavorGrid = document.getElementById('flavorGrid');
+const animationStage = document.getElementById('animationStage');
+const boxSummary = document.getElementById('boxSummary');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+const customBuildsOrder = document.getElementById('customBuildsOrder');
+const orderBoxesList = document.getElementById('orderBoxesList');
+const totalBoxesCount = document.getElementById('totalBoxesCount');
+const totalBoxesPrice = document.getElementById('totalBoxesPrice');
+
+// Render Flavor Grid
+function renderFlavorGrid() {
+  flavorGrid.innerHTML = boxFlavorsData.map((flavor, index) => `
+    <div class="flavor-card" onclick="toggleFlavor('${flavor.name}', this)" role="button" tabindex="0" aria-pressed="false" style="animation: fadeInUp 0.5s ease ${index * 0.05}s both;">
+      <div class="flavor-check"><i class="fas fa-check"></i></div>
+      <span class="flavor-emoji">${flavor.emoji}</span>
+      <div class="flavor-name">${flavor.name}</div>
+      <div class="flavor-hint">${flavor.hint}</div>
+    </div>
+  `).join('');
+}
+
+// Handle Selection
+function toggleFlavor(flavorName, element) {
+  if (buildTimeout) {
+    clearTimeout(buildTimeout);
+    buildTimeout = null;
+    animationStage.classList.remove('active');
+    boxSummary.style.display = 'none';
+    boxSummary.classList.remove('fly-up');
+    document.getElementById('box3d').classList.remove('wrapping');
+  }
+  const index = selectedBoxFlavors.indexOf(flavorName);
+  if (index > -1) {
+    selectedBoxFlavors.splice(index, 1);
+    element.classList.remove('selected');
+    element.setAttribute('aria-pressed', 'false');
+    resetBuilderState();
+  } else {
+    if (selectedBoxFlavors.length >= 2) {
+      cart.showToast('⚠️ Maximum 2 flavours allowed. Tap a selected flavour to remove it first.');
+      element.style.transform = 'translateX(5px)';
+      setTimeout(() => element.style.transform = '', 100);
+      return;
+    }
+    selectedBoxFlavors.push(flavorName);
+    element.classList.add('selected');
+    element.setAttribute('aria-pressed', 'true');
+  }
+  const progress = (selectedBoxFlavors.length / 2) * 100;
+  progressFill.style.width = `${progress}%`;
+  progressText.textContent = `${selectedBoxFlavors.length} / 2 Flavours Selected`;
+  if (selectedBoxFlavors.length === 2) {
+    setTimeout(triggerBoxAnimation, 400);
+  }
+}
+
+// Trigger Animation with Mobile Scroll Offset
+function triggerBoxAnimation() {
+  const builderStage = document.getElementById('builderStage');
+  builderStage.classList.add('active');
+  animationStage.classList.add('active');
+  animationStage.setAttribute('aria-hidden', 'false');
+  
+  setTimeout(() => {
+    const isMobile = window.innerWidth < 768;
+    const offset = isMobile ? 100 : 150;
+    const stageRect = animationStage.getBoundingClientRect();
+    const scrollTo = window.pageYOffset + stageRect.top - offset;
+    window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+  }, 100);
+  
+  setTimeout(() => {
+    const box3d = document.getElementById('box3d');
+    box3d.classList.remove('wrapping');
+    void box3d.offsetWidth;
+    box3d.classList.add('wrapping');
+  }, 300);
+  
+  setTimeout(() => { showBoxSummary(); }, 2800);
+}
+
+// Show Summary
+function showBoxSummary() {
+  const flavorDataMap = Object.fromEntries(boxFlavorsData.map(f => [f.name, f]));
+  const flavorsString = selectedBoxFlavors.join(' and ');
+  const whatsappMessage = `Hi Aureria Candy! I am interested in a custom box of: ${flavorsString}. Please advise on availability and collection/delivery options. Thank you!`;
+  const whatsappUrl = `https://wa.me/27793388849?text=${encodeURIComponent(whatsappMessage)}`;
+  
+  boxSummary.innerHTML = `
+    <div class="summary-icon"><i class="fas fa-check-circle"></i></div>
+    <h3>Your Custom Box is Ready!</h3>
+    <div class="flavor-pills">
+      ${selectedBoxFlavors.map(f => `<span class="flavor-pill">${flavorDataMap[f].emoji} ${f}</span>`).join('')}
+    </div>
+    <div class="price-display">
+      <span class="price-label">Total per Box</span>
+      <span class="price-value">R75.00</span>
+    </div>
+    <div class="summary-actions">
+      <button class="btn-premium primary" onclick="addCustomBoxToCart()">
+        <i class="fas fa-shopping-bag"></i> Add to Cart
+      </button>
+      <a href="${whatsappUrl}" class="btn-premium whatsapp" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> Order via WhatsApp
+      </a>
+      <button class="btn-premium secondary" onclick="buildAnotherBox()">
+        <i class="fas fa-plus-circle"></i> Build Another Box
+      </button>
+    </div>
+  `;
+  boxSummary.style.animation = 'none';
+  void boxSummary.offsetWidth;
+  boxSummary.style.animation = '';
+  boxSummary.style.display = 'block';
+  
+  setTimeout(() => {
+    const isMobile = window.innerWidth < 768;
+    const offset = isMobile ? 100 : 150;
+    const summaryRect = boxSummary.getBoundingClientRect();
+    const scrollTo = window.pageYOffset + summaryRect.top - offset;
+    window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+  }, 100);
+}
+
+// Reset Builder State
+function resetBuilderState() {
+  const builderStage = document.getElementById('builderStage');
+  builderStage.classList.remove('active');
+  animationStage.classList.remove('active');
+  animationStage.setAttribute('aria-hidden', 'true');
+  document.getElementById('box3d').classList.remove('wrapping');
+  boxSummary.style.display = 'none';
+  boxSummary.classList.remove('fly-up');
+  const progress = (selectedBoxFlavors.length / 2) * 100;
+  progressFill.style.width = `${progress}%`;
+  progressText.textContent = `${selectedBoxFlavors.length} / 2 Flavours Selected`;
+}
+
+// Build Another Box
+function buildAnotherBox() {
+  if (buildTimeout) clearTimeout(buildTimeout);
+  boxSummary.classList.add('fly-up');
+  const flavorDataMap = Object.fromEntries(boxFlavorsData.map(f => [f.name, f]));
+  const newBox = {
+    id: Date.now(),
+    flavors: [...selectedBoxFlavors],
+    emojis: selectedBoxFlavors.map(f => flavorDataMap[f].emoji).join(''),
+    price: 75.00
+  };
+  completedBoxes.push(newBox);
+  renderOrderSection();
+  selectedBoxFlavors = [];
+  document.querySelectorAll('.flavor-card').forEach(el => {
+    el.classList.remove('selected');
+    el.setAttribute('aria-pressed', 'false');
+  });
+  progressFill.style.width = '0%';
+  progressText.textContent = '0 / 2 Flavours Selected';
+  
+  buildTimeout = setTimeout(() => {
+    animationStage.classList.remove('active');
+    animationStage.setAttribute('aria-hidden', 'true');
+    document.getElementById('box3d').classList.remove('wrapping');
+    boxSummary.style.display = 'none';
+    boxSummary.classList.remove('fly-up');
+    
+    const isMobile = window.innerWidth < 768;
+    const offset = isMobile ? 80 : 120;
+    const flavorGridEl = document.getElementById('flavorGrid');
+    const scrollTo = window.pageYOffset + flavorGridEl.getBoundingClientRect().top - offset;
+    window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+    buildTimeout = null;
+  }, 800);
+}
+
+// Render the bottom Order Section
+function renderOrderSection() {
+  if (completedBoxes.length === 0) {
+    customBuildsOrder.style.display = 'none';
+    return;
+  }
+  customBuildsOrder.style.display = 'block';
+  orderBoxesList.innerHTML = completedBoxes.map((box, index) => `
+    <div class="order-box-card" style="animation-delay: ${index * 0.08}s;">
+      <div class="order-box-emojis">${box.emojis}</div>
+      <div class="order-box-details">
+        <div class="order-box-name">Custom Box #${index + 1}</div>
+        <div class="order-box-flavors">${box.flavors.join(' & ')}</div>
+      </div>
+      <div class="order-box-price">R${box.price.toFixed(2)}</div>
+      <button class="order-remove-btn" onclick="removeCompletedBox(${box.id})" title="Remove this box">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  `).join('');
+  totalBoxesCount.textContent = completedBoxes.length;
+  const total = completedBoxes.reduce((sum, b) => sum + b.price, 0);
+  totalBoxesPrice.textContent = `R${total.toFixed(2)}`;
+}
+
+function removeCompletedBox(id) {
+  completedBoxes = completedBoxes.filter(b => b.id !== id);
+  renderOrderSection();
+  cart.showToast('🗑️ Box removed from your builds');
+}
+
+function clearAllBuilds() {
+  if (completedBoxes.length === 0) return;
+  if (confirm('Are you sure you want to clear all your custom builds?')) {
+    completedBoxes = [];
+    renderOrderSection();
+    cart.showToast('🗑️ All builds cleared');
+  }
+}
+
+function addCustomBoxToCart() {
+  if (selectedBoxFlavors.length !== 2) return;
+  const customBoxProduct = {
+    id: 'custom-box-' + Date.now(),
+    name: 'Premium Custom Mixed Box',
+    description: `Curated flavours: ${selectedBoxFlavors.join(' & ')}`,
+    price: 75.00,
+    image: 'https://raw.githubusercontent.com/aadildhorat-cloud/hive-times-assets/main/aureria-candy/images/logo-aureriacandy.jpg',
+    categorySlug: 'custom-bowls',
+    badge: 'Custom'
+  };
+  cart.addToCart(customBoxProduct, 1);
+  setTimeout(() => {
+    const cartSidebar = document.getElementById('cartSidebar');
+    if (!cartSidebar.classList.contains('active')) { cart.toggleCart(); }
+  }, 400);
+  buildAnotherBox();
+}
+
+function sendBuildsOrderWhatsApp() {
+  if (completedBoxes.length === 0) { cart.showToast('⚠️ You have no custom builds to order!'); return; }
+  const orderType = document.querySelector('input[name="buildOrderType"]:checked').value;
+  const total = completedBoxes.reduce((sum, b) => sum + b.price, 0).toFixed(2);
+  let message = `🍬 *Custom Box Order — Aureria Candy*\n\n`;
+  message += `*Order Preference:* ${orderType}\n`;
+  message += `*Number of Boxes:* ${completedBoxes.length}\n\n`;
+  message += `*Box Details:*\n`;
+  completedBoxes.forEach((box, index) => {
+    message += `📦 *Box #${index + 1}* — R${box.price.toFixed(2)}\n`;
+    message += `   Flavours: ${box.flavors.join(' & ')}\n\n`;
+  });
+  message += `━━━━━━━━━━━━━━━━━━━━\n`;
+  message += `💰 *Order Total: R${total}*\n\n`;
+  if (orderType === 'Delivery') {
+    message += `🚚 *Delivery Requested*\nPlease confirm availability and delivery fees to my area. Thank you!`;
+  } else {
+    message += `🏪 *Collection Requested*\nPlease confirm availability and a suitable collection time. Thank you!`;
+  }
+  window.open(`https://wa.me/27793388849?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+// Initialize
+if (document.getElementById('flavorGrid')) { renderFlavorGrid(); }
 </script>
 </body>
 </html>
