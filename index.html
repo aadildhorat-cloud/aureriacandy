@@ -661,223 +661,341 @@ box-shadow: 0 8px 20px rgba(217, 119, 6, 0.5);
 outline: 2px solid var(--white);
 outline-offset: 2px;
 }
-/* ===== UPGRADED PREMIUM CANDY HERO SLIDER ===== */
+/* ===== CRYSTALLIZED GOLD HERO SLIDER ===== */
 .candy-hero-slider-section {
-background: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
-position: relative;
-overflow: hidden;
-border-bottom: 3px solid var(--gold);
+  background: linear-gradient(135deg, #0a0600 0%, #1a0f00 30%, #2d1810 60%, #0a0600 100%);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--gold);
+  min-height: 650px;
 }
 .candy-hero-slider-section::before {
-content: '';
-position: absolute;
-inset: 0;
-background:
-radial-gradient(circle at 20% 50%, rgba(217, 119, 6, 0.15) 0%, transparent 50%),
-radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
-animation: bgShift 15s ease-in-out infinite alternate;
-pointer-events: none;
-z-index: 1;
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(251, 191, 36, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(217, 119, 6, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(254, 243, 199, 0.05) 0%, transparent 70%);
+  animation: goldAmbient 15s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
 }
-@keyframes bgShift {
-0% { transform: scale(1); }
-100% { transform: scale(1.15); }
+@keyframes goldAmbient {
+  0% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+  100% { transform: scale(1.2) rotate(5deg); opacity: 1; }
 }
+
+/* Floating gold dust particles */
+.candy-hero-slider-section::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(251, 191, 36, 0.8), transparent),
+    radial-gradient(2px 2px at 40% 70%, rgba(245, 158, 11, 0.6), transparent),
+    radial-gradient(1px 1px at 60% 20%, rgba(254, 243, 199, 0.9), transparent),
+    radial-gradient(2px 2px at 80% 50%, rgba(251, 191, 36, 0.7), transparent),
+    radial-gradient(1px 1px at 30% 80%, rgba(217, 119, 6, 0.8), transparent),
+    radial-gradient(2px 2px at 70% 40%, rgba(254, 243, 199, 0.6), transparent);
+  background-size: 100% 100%;
+  animation: goldDust 20s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes goldDust {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-100px) translateX(50px); }
+}
+
 .candy-hero-swiper {
-width: 100%;
-height: 100%;
-min-height: 650px;
-position: relative;
-z-index: 2;
+  width: 100%; height: 100%; min-height: 650px;
+  position: relative; z-index: 2;
 }
 .swiper-slide {
-display: flex;
-align-items: center;
-justify-content: center;
-overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
 }
+
+/* ===== SLIDE 1: CRYSTALLIZE ANIMATION ===== */
+.slide-1 .crystal-fruit {
+  position: relative;
+  width: 300px; height: 300px;
+  animation: crystalizeIn 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.slide-1 .crystal-fruit svg {
+  width: 100%; height: 100%;
+  filter: drop-shadow(0 0 30px rgba(251, 191, 36, 0.6));
+}
+@keyframes crystalizeIn {
+  0% { transform: scale(0) rotate(-180deg); opacity: 0; filter: blur(20px); }
+  50% { transform: scale(1.2) rotate(10deg); opacity: 0.8; filter: blur(5px); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; filter: blur(0); }
+}
+.slide-1 .gold-ring-anim {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 350px; height: 350px;
+  transform: translate(-50%, -50%);
+  border: 2px solid transparent;
+  border-top-color: #fbbf24;
+  border-right-color: #d97706;
+  border-radius: 50%;
+  animation: ringSpin 3s linear infinite;
+  filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.5));
+}
+@keyframes ringSpin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* ===== SLIDE 2: SHIMMER WAVE ANIMATION ===== */
+.slide-2 .shimmer-fruit {
+  position: relative;
+  width: 300px; height: 300px;
+  animation: shimmerWave 2s ease-in-out infinite;
+}
+.slide-2 .shimmer-fruit svg {
+  width: 100%; height: 100%;
+  filter: drop-shadow(0 0 25px rgba(236, 72, 153, 0.5));
+}
+@keyframes shimmerWave {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.05) rotate(2deg); }
+  50% { transform: scale(1.1) rotate(0deg); }
+  75% { transform: scale(1.05) rotate(-2deg); }
+}
+.slide-2 .shimmer-overlay {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.3), transparent);
+  animation: shimmerSweep 3s ease-in-out infinite;
+}
+@keyframes shimmerSweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ===== SLIDE 3: FLOAT & GLOW ANIMATION ===== */
+.slide-3 .float-bowl {
+  position: relative;
+  width: 300px; height: 300px;
+  animation: floatGlow 4s ease-in-out infinite;
+}
+.slide-3 .float-bowl svg {
+  width: 100%; height: 100%;
+  filter: drop-shadow(0 0 30px rgba(217, 119, 6, 0.6));
+}
+@keyframes floatGlow {
+  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.4)); }
+  50% { transform: translateY(-20px) scale(1.05); filter: drop-shadow(0 0 40px rgba(251, 191, 36, 0.8)); }
+}
+.slide-3 .glow-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 320px; height: 320px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.2) 0%, transparent 70%);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+/* ===== SLIDE CONTENT ===== */
 .slide-content-wrapper {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: clamp(2rem, 5vw, 4rem);
-align-items: center;
-width: 100%;
-max-width: 1400px;
-padding: 0 var(--container-padding);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 var(--container-padding);
 }
 .candy-visual-side {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-opacity: 0;
-transform: translateX(-40px);
-transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .swiper-slide-active .candy-visual-side {
-opacity: 1;
-transform: translateX(0);
-transition-delay: 0.2s;
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: 0.3s;
 }
 .candy-svg {
-width: 100%;
-max-width: 350px;
-height: auto;
-filter: drop-shadow(0 20px 30px rgba(217, 119, 6, 0.4));
+  width: 100%; max-width: 350px; height: auto;
 }
 .floating-fruit { animation: float 4s ease-in-out infinite; }
 .sparkle { animation: sparkle-anim 2s ease-in-out infinite; }
 @keyframes float {
-0%, 100% { transform: translateY(0); }
-50% { transform: translateY(-15px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 @keyframes sparkle-anim {
-0%, 100% { opacity: 0.3; transform: scale(0.8); }
-50% { opacity: 1; transform: scale(1.2); }
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 .candy-content-side {
-background: rgba(255, 255, 255, 0.05);
-border: 1px solid rgba(255, 255, 255, 0.1);
-border-radius: 24px;
-padding: clamp(2rem, 4vw, 3rem);
-backdrop-filter: blur(20px);
--webkit-backdrop-filter: blur(20px);
-box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-opacity: 0;
-transform: translateY(30px);
-transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(251, 191, 36, 0.05);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 24px;
+  padding: clamp(2rem, 4vw, 3rem);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(251, 191, 36, 0.1);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .swiper-slide-active .candy-content-side {
-opacity: 1;
-transform: translateY(0);
-transition-delay: 0.4s;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.5s;
 }
 .section-badge {
-display: inline-flex;
-align-items: center;
-gap: 0.5rem;
-background: rgba(217, 119, 6, 0.25);
-color: var(--gold);
-padding: 0.5rem 1.25rem;
-border-radius: 50px;
-font-weight: 700;
-font-size: 0.8rem;
-margin-bottom: 1.25rem;
-border: 1px solid rgba(251, 191, 36, 0.3);
-letter-spacing: 1px;
-text-transform: uppercase;
-opacity: 0;
-transform: translateY(20px);
-transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(217, 119, 6, 0.1));
+  color: var(--gold);
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-weight: 700; font-size: 0.8rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  letter-spacing: 1px; text-transform: uppercase;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.swiper-slide-active .section-badge { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+.swiper-slide-active .section-badge { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
 .candy-content-side h3 {
-font-family: var(--font-display);
-font-size: clamp(2rem, 4vw, 3.2rem);
-font-weight: 800;
-color: var(--white);
-margin-bottom: 1.25rem;
-line-height: 1.1;
-background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);
-background-clip: text;
--webkit-text-fill-color: transparent;
-opacity: 0;
-transform: translateY(20px);
-transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 1.25rem;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldTextShimmer 4s ease-in-out infinite;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.swiper-slide-active .candy-content-side h3 { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
+@keyframes goldTextShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.swiper-slide-active .candy-content-side h3 { opacity: 1; transform: translateY(0); transition-delay: 0.7s; }
 .candy-content-side p {
-color: rgba(255, 255, 255, 0.8);
-font-size: clamp(1rem, 1.5vw, 1.15rem);
-line-height: 1.7;
-margin-bottom: 2rem;
-opacity: 0;
-transform: translateY(20px);
-transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  color: rgba(254, 243, 199, 0.8);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.swiper-slide-active .candy-content-side p { opacity: 1; transform: translateY(0); transition-delay: 0.7s; }
+.swiper-slide-active .candy-content-side p { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
 .cta-view-products {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 0.75rem;
-width: 100%;
-max-width: 280px;
-padding: 1.1rem 1.5rem;
-background: linear-gradient(135deg, var(--accent), var(--gold));
-color: var(--primary-dark);
-font-weight: 700;
-font-size: 1.05rem;
-border-radius: 14px;
-text-decoration: none;
-box-shadow: 0 10px 30px rgba(217, 119, 6, 0.4);
-position: relative;
-overflow: hidden;
-opacity: 0;
-transform: translateY(20px);
-transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem;
+  width: 100%; max-width: 280px;
+  padding: 1.1rem 1.5rem;
+  background: linear-gradient(135deg, #fbbf24, #d97706, #fbbf24);
+  background-size: 200% 200%;
+  color: #1a0f00;
+  font-weight: 700; font-size: 1.05rem;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4), 0 0 20px rgba(251, 191, 36, 0.2);
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: ctaGoldShimmer 3s ease-in-out infinite;
 }
-.swiper-slide-active .cta-view-products { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+@keyframes ctaGoldShimmer {
+  0%, 100% { background-position: 0% 50%; box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4); }
+  50% { background-position: 100% 50%; box-shadow: 0 10px 40px rgba(251, 191, 36, 0.6); }
+}
+.swiper-slide-active .cta-view-products { opacity: 1; transform: translateY(0); transition-delay: 0.9s; }
 .cta-view-products::before {
-content: '';
-position: absolute;
-top: 0; left: -100%;
-width: 100%; height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-transition: left 0.6s;
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.6s;
 }
 .cta-view-products:hover::before { left: 100%; }
 .cta-view-products:hover {
-transform: translateY(-4px);
-box-shadow: 0 15px 40px rgba(251, 191, 36, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(251, 191, 36, 0.6);
 }
 .cta-view-products:hover i { transform: translateX(6px); }
 .cta-view-products i { transition: transform 0.3s ease; }
+
+/* Swiper Controls */
 .candy-hero-swiper .swiper-pagination { bottom: 30px !important; }
 .candy-hero-swiper .swiper-pagination-bullet {
-width: 12px; height: 12px; background: rgba(255, 255, 255, 0.4); opacity: 1; transition: all 0.3s ease;
+  width: 12px; height: 12px;
+  background: rgba(251, 191, 36, 0.3);
+  opacity: 1; transition: all 0.3s ease;
+  border: 1px solid rgba(251, 191, 36, 0.5);
 }
 .candy-hero-swiper .swiper-pagination-bullet-active {
-background: var(--gold); width: 32px; border-radius: 6px;
+  background: var(--gold);
+  width: 32px; border-radius: 6px;
+  box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
 }
 .candy-hero-swiper .swiper-button-next, .candy-hero-swiper .swiper-button-prev {
-color: var(--white); background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);
-width: 56px; height: 56px; border-radius: 50%; backdrop-filter: blur(8px); transition: all 0.3s ease;
+  color: var(--gold);
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  width: 56px; height: 56px; border-radius: 50%;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
 }
 .candy-hero-swiper .swiper-button-next:after, .candy-hero-swiper .swiper-button-prev:after { font-size: 1.4rem; font-weight: bold; }
 .candy-hero-swiper .swiper-button-next:hover, .candy-hero-swiper .swiper-button-prev:hover {
-background: var(--accent); border-color: var(--gold); transform: scale(1.1); box-shadow: 0 0 25px rgba(217, 119, 6, 0.6);
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(251, 191, 36, 0.6);
 }
-/* MOBILE OPTIMIZATION: Professional, compact slider height */
+
+/* MOBILE OPTIMIZATION */
 @media (max-width: 968px) {
-.slide-content-wrapper { grid-template-columns: 1fr; text-align: center; gap: 1rem; padding: 1rem var(--container-padding); }
-.candy-visual-side { order: 1; }
-.candy-content-side { order: 2; text-align: center; padding: 1.5rem; }
-.candy-svg { max-width: 180px; margin: 0 auto; }
-.cta-view-products { max-width: 100%; }
+  .slide-content-wrapper { grid-template-columns: 1fr; text-align: center; gap: 1rem; padding: 1rem var(--container-padding); }
+  .candy-visual-side { order: 1; }
+  .candy-content-side { order: 2; text-align: center; padding: 1.5rem; }
+  .candy-svg { max-width: 180px; margin: 0 auto; }
+  .cta-view-products { max-width: 100%; }
+  .slide-1 .crystal-fruit, .slide-2 .shimmer-fruit, .slide-3 .float-bowl { width: 200px; height: 200px; }
+  .slide-1 .gold-ring-anim { width: 240px; height: 240px; }
+  .slide-3 .glow-ring { width: 220px; height: 220px; }
 }
 @media (max-width: 768px) {
-.candy-hero-swiper {
-min-height: 120px; /* Reduced from 750px to take a professional, compact amount of the mobile screen */
-height: auto;
-}
-.candy-hero-swiper .swiper-button-next, .candy-hero-swiper .swiper-button-prev { display: none; }
-.candy-hero-swiper .swiper-pagination { bottom: 10px !important; }
-.slide-content-wrapper { gap: 0.75rem; padding: 1rem var(--container-padding); }
-.candy-visual-side { transform: none !important; }
-.swiper-slide-active .candy-visual-side { transform: none !important; }
-.candy-svg { max-width: 140px; }
-.candy-content-side {
-padding: 1rem;
-background: rgba(255, 255, 255, 0.03);
-border-radius: 16px;
-transform: none !important;
-}
-.swiper-slide-active .candy-content-side { transform: none !important; }
-.candy-content-side h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
-.candy-content-side p { font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.5; }
-.section-badge { font-size: 0.65rem; padding: 0.35rem 0.85rem; margin-bottom: 0.5rem; }
-.cta-view-products { padding: 0.85rem 1rem; font-size: 0.9rem; }
+  .candy-hero-slider-section { min-height: 500px; }
+  .candy-hero-swiper { min-height: 500px; height: auto; }
+  .candy-hero-swiper .swiper-button-next, .candy-hero-swiper .swiper-button-prev { display: none; }
+  .candy-hero-swiper .swiper-pagination { bottom: 10px !important; }
+  .slide-content-wrapper { gap: 0.75rem; padding: 1rem var(--container-padding); }
+  .candy-visual-side { transform: none !important; }
+  .swiper-slide-active .candy-visual-side { transform: none !important; }
+  .candy-svg { max-width: 140px; }
+  .candy-content-side {
+    padding: 1rem;
+    background: rgba(251, 191, 36, 0.03);
+    border-radius: 16px;
+    transform: none !important;
+  }
+  .swiper-slide-active .candy-content-side { transform: none !important; }
+  .candy-content-side h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+  .candy-content-side p { font-size: 0.85rem; margin-bottom: 1rem; line-height: 1.5; }
+  .section-badge { font-size: 0.65rem; padding: 0.35rem 0.85rem; margin-bottom: 0.5rem; }
+  .cta-view-products { padding: 0.85rem 1rem; font-size: 0.9rem; }
+  .slide-1 .crystal-fruit, .slide-2 .shimmer-fruit, .slide-3 .float-bowl { width: 150px; height: 150px; }
+  .slide-1 .gold-ring-anim { width: 180px; height: 180px; }
+  .slide-3 .glow-ring { width: 170px; height: 170px; }
 }
 /* ===== SEARCH & FILTER BAR (STICKY) ===== */
 .search-filter-bar {
@@ -2111,126 +2229,222 @@ button, a, .filter-chip, .product-card, .qty-btn { -webkit-user-select: none; -m
 <body>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-/* ===== PRELOADER ===== */
+/* ===== CRYSTALLIZED GOLD PRELOADER ===== */
 .preloader {
-position: fixed; inset: 0;
-background: radial-gradient(ellipse at center, #022c22 0%, #000000 100%);
-display: flex; align-items: center; justify-content: center;
-z-index: 9999; transition: opacity 0.6s ease, visibility 0.6s ease; overflow: hidden;
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at center, #1a0f00 0%, #0a0600 40%, #000000 100%);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s ease; overflow: hidden;
 }
 .preloader::before {
-content: ''; position: absolute; inset: 0;
-background: radial-gradient(circle at 20% 80%, rgba(217, 119, 6, 0.05) 0%, transparent 50%),
-radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
-animation: ambientGlow 4s ease-in-out infinite alternate;
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(251, 191, 36, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(217, 119, 6, 0.06) 0%, transparent 40%);
+  animation: ambientGoldPulse 4s ease-in-out infinite alternate;
 }
-@keyframes ambientGlow { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+@keyframes ambientGoldPulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+
 .preloader.fade-out { opacity: 0; visibility: hidden; }
-.preloader-content { text-align: center; position: relative; z-index: 2; animation: fadeInUp 0.8s ease; }
-/* ===== CANDY ANIMATION ===== */
-.candy-container { position: relative; width: 120px; height: 120px; margin: 0 auto 2rem; }
-.candy-large {
-position: absolute; width: 100px; height: 100px; top: 10px; left: 10px;
-border: 8px dashed var(--gold); border-radius: 50%;
-animation: rotate 3s linear infinite;
+.preloader-content { text-align: center; position: relative; z-index: 2; animation: fadeInUp 1s ease; }
+
+/* ===== CRYSTALLIZED GOLD RINGS ===== */
+.crystal-ring-container {
+  position: relative;
+  width: 220px; height: 220px;
+  margin: 0 auto 2rem;
+  display: flex; align-items: center; justify-content: center;
 }
-.candy-small {
-position: absolute; width: 60px; height: 60px; top: 30px; left: 30px;
-border: 8px dashed var(--accent); border-radius: 50%;
-animation: rotate 2s linear infinite reverse;
+.crystal-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
 }
-.candy-center {
-position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-width: 20px; height: 20px; background: var(--white); border-radius: 50%;
+.crystal-ring-1 {
+  width: 220px; height: 220px;
+  border-top-color: #fbbf24;
+  border-right-color: #f59e0b;
+  animation: crystalSpin 3s linear infinite;
+  filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.6));
 }
-/* ===== LOGO TEXT ===== */
+.crystal-ring-2 {
+  width: 180px; height: 180px;
+  border-bottom-color: #d97706;
+  border-left-color: #fbbf24;
+  animation: crystalSpin 2s linear infinite reverse;
+  filter: drop-shadow(0 0 12px rgba(217, 119, 6, 0.5));
+}
+.crystal-ring-3 {
+  width: 140px; height: 140px;
+  border-top-color: #fef3c7;
+  border-right-color: #fbbf24;
+  animation: crystalSpin 1.5s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(254, 243, 199, 0.7));
+}
+.crystal-ring-4 {
+  width: 100px; height: 100px;
+  border-bottom-color: #f59e0b;
+  border-left-color: #d97706;
+  animation: crystalSpin 1s linear infinite reverse;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+}
+@keyframes crystalSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== CRYSTAL CENTER GLOW ===== */
+.crystal-center {
+  position: absolute;
+  width: 60px; height: 60px;
+  background: radial-gradient(circle, #fbbf24 0%, #d97706 50%, #92400e 100%);
+  border-radius: 50%;
+  animation: crystalPulse 2s ease-in-out infinite;
+  box-shadow:
+    0 0 30px rgba(251, 191, 36, 0.8),
+    0 0 60px rgba(217, 119, 6, 0.5),
+    inset 0 0 20px rgba(254, 243, 199, 0.6);
+}
+@keyframes crystalPulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* ===== FLOATING CRYSTAL PARTICLES ===== */
+.crystal-particle {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: #fbbf24;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fbbf24, 0 0 20px #d97706;
+  animation: crystalFloat 3s ease-in-out infinite;
+}
+.crystal-particle:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+.crystal-particle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
+.crystal-particle:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 1s; }
+.crystal-particle:nth-child(4) { bottom: 15%; right: 20%; animation-delay: 1.5s; }
+.crystal-particle:nth-child(5) { top: 50%; left: 5%; animation-delay: 0.3s; }
+.crystal-particle:nth-child(6) { top: 40%; right: 5%; animation-delay: 0.8s; }
+.crystal-particle:nth-child(7) { bottom: 40%; left: 10%; animation-delay: 1.2s; }
+.crystal-particle:nth-child(8) { bottom: 30%; right: 10%; animation-delay: 1.7s; }
+@keyframes crystalFloat {
+  0%, 100% { opacity: 0; transform: scale(0) translateY(0); }
+  50% { opacity: 1; transform: scale(1.5) translateY(-20px); }
+}
+
+/* ===== CRYSTALLIZED LOGO TEXT ===== */
 .preloader-logo-text { margin-bottom: 1.5rem; }
 .preloader-logo-text h1 {
-font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900;
-background: linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #064e3b 100%);
-background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-letter-spacing: -1px; text-shadow: 0 0 40px rgba(217, 119, 6, 0.3);
-animation: shimmer 3s ease-in-out infinite; line-height: 1.1;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 25%, #d97706 50%, #fbbf24 75%, #fef3c7 100%);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -2px;
+  animation: crystalShimmer 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.5));
+  line-height: 1.1;
+  text-transform: none;
+}
+@keyframes crystalShimmer {
+  0%, 100% { background-position: 0% 50%; filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.5)); }
+  50% { background-position: 100% 50%; filter: drop-shadow(0 0 30px rgba(251, 191, 36, 0.8)); }
 }
 .preloader-logo-text .subtitle {
-font-size: clamp(1rem, 3vw, 1.5rem); font-weight: 700; color: #d97706;
-letter-spacing: 8px; text-transform: uppercase; margin-top: 0.5rem;
-animation: fadeInUp 0.8s ease 0.2s both;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+  font-weight: 600;
+  color: #fef3c7;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+  animation: subtitleFadeIn 1s ease 0.3s both;
+  text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
 }
-@keyframes shimmer { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.2); } }
+@keyframes subtitleFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
 /* ===== TAGLINE ===== */
 .preloader-tagline {
-color: rgba(255, 255, 255, 0.7); font-size: clamp(0.9rem, 2vw, 1.1rem);
-font-weight: 500; margin-bottom: 2rem; font-style: italic;
-animation: fadeInUp 0.8s ease 0.4s both;
+  color: rgba(254, 243, 199, 0.7);
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease 0.5s both;
+  letter-spacing: 1px;
 }
-/* ===== PROGRESS BAR ===== */
+
+/* ===== CRYSTAL PROGRESS BAR ===== */
 .preloader-progress {
-width: 280px; max-width: 80vw; height: 4px; background: rgba(255, 255, 255, 0.1);
-border-radius: 10px; overflow: hidden; margin: 0 auto;
-box-shadow: 0 0 20px rgba(217, 119, 6, 0.2); position: relative;
+  width: 280px; max-width: 80vw; height: 3px;
+  background: rgba(251, 191, 36, 0.1);
+  border-radius: 10px; overflow: hidden; margin: 0 auto;
+  position: relative;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
 }
 .preloader-progress::before {
-content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.3), transparent);
-animation: progressShimmer 2s ease-in-out infinite;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.4), transparent);
+  animation: progressShimmer 2s ease-in-out infinite;
 }
 .progress-bar {
-height: 100%;
-background: linear-gradient(90deg, #064e3b, #d97706, #fbbf24, #d97706, #064e3b);
-background-size: 200% 100%; border-radius: 10px;
-animation: progress 2s ease-in-out forwards, gradientMove 2s linear infinite;
-box-shadow: 0 0 15px rgba(217, 119, 6, 0.6);
+  height: 100%;
+  background: linear-gradient(90deg, #fef3c7, #fbbf24, #d97706, #fbbf24, #fef3c7);
+  background-size: 200% 100%;
+  border-radius: 10px;
+  animation: progress 2.5s ease-in-out forwards, gradientMove 2s linear infinite;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.8), 0 0 40px rgba(217, 119, 6, 0.4);
 }
-@keyframes progress { 0% { width: 0%; } 50% { width: 70%; } 100% { width: 100%; } }
+@keyframes progress { 0% { width: 0%; } 50% { width: 75%; } 100% { width: 100%; } }
 @keyframes gradientMove { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
 @keyframes progressShimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-/* ===== SPARKLES ===== */
-.sparkle {
-position: absolute; width: 4px; height: 4px; background: #fbbf24; border-radius: 50%;
-animation: sparkle 2s ease-in-out infinite;
-}
-.sparkle:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
-.sparkle:nth-child(2) { top: 30%; right: 20%; animation-delay: 0.5s; }
-.sparkle:nth-child(3) { bottom: 25%; left: 25%; animation-delay: 1s; }
-.sparkle:nth-child(4) { bottom: 30%; right: 15%; animation-delay: 1.5s; }
-.sparkle:nth-child(5) { top: 50%; left: 10%; animation-delay: 0.3s; }
-.sparkle:nth-child(6) { top: 40%; right: 10%; animation-delay: 0.8s; }
-@keyframes sparkle {
-0%, 100% { opacity: 0; transform: scale(0); }
-50% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px #fbbf24, 0 0 20px #d97706; }
-}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 768px) {
-.candy-container { width: 100px; height: 100px; }
-.candy-large { width: 80px; height: 80px; top: 10px; left: 10px; }
-.candy-small { width: 50px; height: 50px; top: 25px; left: 25px; }
-.preloader-logo-text .subtitle { letter-spacing: 5px; }
+  .crystal-ring-container { width: 180px; height: 180px; }
+  .crystal-ring-1 { width: 180px; height: 180px; }
+  .crystal-ring-2 { width: 150px; height: 150px; }
+  .crystal-ring-3 { width: 120px; height: 120px; }
+  .crystal-ring-4 { width: 80px; height: 80px; }
+  .crystal-center { width: 50px; height: 50px; }
+  .preloader-logo-text .subtitle { letter-spacing: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
-.candy-large, .candy-small, .progress-bar, .sparkle, .preloader-logo-text h1 { animation: none; }
-.progress-bar { width: 100%; }
-.preloader::before { animation: none; }
+  .crystal-ring, .crystal-center, .progress-bar, .crystal-particle, .preloader-logo-text h1 { animation: none; }
+  .progress-bar { width: 100%; }
+  .preloader::before { animation: none; }
 }
 </style>
 <!-- Professional Preloader -->
+<!-- Crystallized Gold Preloader -->
 <div class="preloader" id="preloader">
-<div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
-<div class="sparkle"></div><div class="sparkle"></div><div class="sparkle"></div>
-<div class="preloader-content">
-<div class="candy-container">
-<div class="candy-large"></div>
-<div class="candy-small"></div>
-<div class="candy-center"></div>
-</div>
-<div class="preloader-logo-text">
-<h1>AURERIA CANDY</h1>
-<div class="subtitle">Specially Coated Fruits</div>
-</div>
-<p class="preloader-tagline">Loading delicious treats...</p>
-<div class="preloader-progress"><div class="progress-bar"></div></div>
-</div>
+  <div class="crystal-particle"></div>
+  <div class="crystal-particle"></div>
+  <div class="crystal-particle"></div>
+  <div class="crystal-particle"></div>
+  <div class="crystal-particle"></div>
+  <div class="crystal-particle"></div>
+  <div class="crystal-particle"></div>
+  <div class="crystal-particle"></div>
+  <div class="preloader-content">
+    <div class="crystal-ring-container">
+      <div class="crystal-ring crystal-ring-1"></div>
+      <div class="crystal-ring crystal-ring-2"></div>
+      <div class="crystal-ring crystal-ring-3"></div>
+      <div class="crystal-ring crystal-ring-4"></div>
+      <div class="crystal-center"></div>
+    </div>
+    <div class="preloader-logo-text">
+      <h1>Aureria</h1>
+      <div class="subtitle">Candied Fruits</div>
+    </div>
+    <p class="preloader-tagline">Crafting crystallized sweetness...</p>
+    <div class="preloader-progress"><div class="progress-bar"></div></div>
+  </div>
 </div>
 <script>
 window.addEventListener('load', function() {
@@ -2933,117 +3147,137 @@ display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-f
 </div>
 </div>
 </nav>
-<!-- ========== UPGRADED PREMIUM CANDY HERO SLIDER ========== -->
+<!-- ========== CRYSTALLIZED GOLD HERO SLIDER ========== -->
 <section class="candy-hero-slider-section" id="candy-hero">
-<div class="swiper candy-hero-swiper">
-<div class="swiper-wrapper">
-<!-- Slide 1: Sherbet Coated -->
-<div class="swiper-slide">
-<div class="slide-content-wrapper">
-<div class="candy-visual-side">
-<div class="candy-animation">
-<svg class="candy-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<filter id="glow1" x="-20%" y="-20%" width="140%" height="140%">
-<feGaussianBlur stdDeviation="8" result="blur" />
-<feComposite in="SourceGraphic" in2="blur" operator="over" />
-</filter>
-</defs>
-<g filter="url(#glow1)" class="floating-fruit">
-<circle cx="200" cy="200" r="100" fill="#ef4444" opacity="0.9"/>
-<path d="M 150 150 Q 200 100 250 150 Q 300 200 250 250 Q 200 300 150 250 Q 100 200 150 150" fill="#fbbf24" opacity="0.8"/>
-<circle cx="180" cy="180" r="8" fill="#ffffff" opacity="0.6"/>
-<circle cx="220" cy="220" r="6" fill="#ffffff" opacity="0.6"/>
-<circle cx="210" cy="170" r="5" fill="#ffffff" opacity="0.6"/>
-</g>
-</svg>
-</div>
-</div>
-<div class="candy-content-side">
-<div class="section-badge"><i class="fas fa-candy-cane"></i> Signature Collection</div>
-<h3>Sherbet Coated Fruits</h3>
-<p>Experience the perfect crackle of our signature sherbet coating over juicy, hand-picked fruits. Available in strawberry, blue raspberry, and orange.</p>
-<a href="#products" class="cta-view-products" onclick="setFilter('sherbet-coated'); setTimeout(() => { const el = document.getElementById('products'); if (el) el.scrollIntoView({behavior: 'smooth'}); }, 100); return false;">
-<span>Shop Sherbet Fruits</span>
-<i class="fas fa-arrow-right"></i>
-</a>
-</div>
-</div>
-</div>
-<!-- Slide 2: Bubblegum Coated -->
-<div class="swiper-slide">
-<div class="slide-content-wrapper">
-<div class="candy-visual-side">
-<div class="candy-animation">
-<svg class="candy-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
-<feGaussianBlur stdDeviation="8" result="blur" />
-<feComposite in="SourceGraphic" in2="blur" operator="over" />
-</filter>
-</defs>
-<g filter="url(#glow2)" class="floating-fruit">
-<circle cx="200" cy="200" r="90" fill="#ec4899" opacity="0.9"/>
-<circle cx="200" cy="200" r="70" fill="#3b82f6" opacity="0.8"/>
-<circle cx="200" cy="200" r="50" fill="#ffffff" opacity="0.3"/>
-<g class="sparkle">
-<circle cx="160" cy="160" r="4" fill="#fbbf24"/>
-<circle cx="240" cy="240" r="4" fill="#fbbf24"/>
-<circle cx="230" cy="170" r="3" fill="#fbbf24"/>
-</g>
-</g>
-</svg>
-</div>
-</div>
-<div class="candy-content-side">
-<div class="section-badge"><i class="fas fa-star"></i> Fan Favourite</div>
-<h3>Bubblegum Coated Fruits</h3>
-<p>Double-layered sour and sweet bubblegum coating for an unforgettable flavour explosion. The ultimate treat for bubblegum lovers.</p>
-<a href="#products" class="cta-view-products" onclick="setFilter('bubblegum-coated'); setTimeout(() => { const el = document.getElementById('products'); if (el) el.scrollIntoView({behavior: 'smooth'}); }, 100); return false;">
-<span>Shop Bubblegum Fruits</span>
-<i class="fas fa-arrow-right"></i>
-</a>
-</div>
-</div>
-</div>
-<!-- Slide 3: Custom Bowls -->
-<div class="swiper-slide">
-<div class="slide-content-wrapper">
-<div class="candy-visual-side">
-<div class="candy-animation">
-<svg class="candy-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<filter id="glow3" x="-20%" y="-20%" width="140%" height="140%">
-<feGaussianBlur stdDeviation="8" result="blur" />
-<feComposite in="SourceGraphic" in2="blur" operator="over" />
-</filter>
-</defs>
-<g filter="url(#glow3)" class="floating-fruit">
-<path d="M 100 200 Q 100 300 200 300 Q 300 300 300 200 Z" fill="#d97706" opacity="0.9"/>
-<circle cx="160" cy="180" r="30" fill="#ef4444"/>
-<circle cx="200" cy="160" r="35" fill="#3b82f6"/>
-<circle cx="240" cy="180" r="30" fill="#10b981"/>
-<path d="M 150 140 L 250 140 L 230 120 L 170 120 Z" fill="#fbbf24"/>
-</g>
-</svg>
-</div>
-</div>
-<div class="candy-content-side">
-<div class="section-badge"><i class="fas fa-gift"></i> Custom Orders</div>
-<h3>Custom Mixed Bowls</h3>
-<p>Can't decide? Get a mix of all our signature flavours. Colors are customizable to your suitings for parties, events, and gifts!</p>
-<a href="#products" class="cta-view-products" onclick="setFilter('custom-bowls'); setTimeout(() => { const el = document.getElementById('products'); if (el) el.scrollIntoView({behavior: 'smooth'}); }, 100); return false;">
-<span>Shop Custom Bowls</span>
-<i class="fas fa-arrow-right"></i>
-</a>
-</div>
-</div>
-</div>
-</div>
-<div class="swiper-pagination"></div>
-<div class="swiper-button-next"></div>
-<div class="swiper-button-prev"></div>
-</div>
+  <div class="swiper candy-hero-swiper">
+    <div class="swiper-wrapper">
+      <!-- Slide 1: Sherbet Coated - CRYSTALLIZE ANIMATION -->
+      <div class="swiper-slide slide-1">
+        <div class="slide-content-wrapper">
+          <div class="candy-visual-side">
+            <div class="crystal-fruit">
+              <div class="gold-ring-anim"></div>
+              <svg class="candy-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="goldGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#fbbf24;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                  </linearGradient>
+                  <filter id="glow1" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="10" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+                <g filter="url(#glow1)">
+                  <circle cx="200" cy="200" r="100" fill="url(#goldGrad1)" opacity="0.9"/>
+                  <circle cx="200" cy="200" r="80" fill="#ef4444" opacity="0.8"/>
+                  <path d="M 150 150 Q 200 100 250 150 Q 300 200 250 250 Q 200 300 150 250 Q 100 200 150 150" fill="#fbbf24" opacity="0.6"/>
+                  <circle cx="180" cy="180" r="8" fill="#ffffff" opacity="0.8"/>
+                  <circle cx="220" cy="220" r="6" fill="#ffffff" opacity="0.8"/>
+                  <circle cx="210" cy="170" r="5" fill="#ffffff" opacity="0.8"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="candy-content-side">
+            <div class="section-badge"><i class="fas fa-gem"></i> Signature Collection</div>
+            <h3>Sherbet Coated Fruits</h3>
+            <p>Experience the perfect crackle of our signature sherbet coating over juicy, hand-picked fruits. Available in strawberry, blue raspberry, and orange.</p>
+            <a href="#products" class="cta-view-products" onclick="setFilter('sherbet-coated'); setTimeout(() => { const el = document.getElementById('products'); if (el) el.scrollIntoView({behavior: 'smooth'}); }, 100); return false;">
+              <span>Shop Sherbet Fruits</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 2: Bubblegum Coated - SHIMMER WAVE ANIMATION -->
+      <div class="swiper-slide slide-2">
+        <div class="slide-content-wrapper">
+          <div class="candy-visual-side">
+            <div class="shimmer-fruit">
+              <div class="shimmer-overlay"></div>
+              <svg class="candy-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#fbbf24;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                  </linearGradient>
+                  <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="10" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+                <g filter="url(#glow2)">
+                  <circle cx="200" cy="200" r="90" fill="url(#goldGrad2)" opacity="0.9"/>
+                  <circle cx="200" cy="200" r="70" fill="#ec4899" opacity="0.8"/>
+                  <circle cx="200" cy="200" r="50" fill="#3b82f6" opacity="0.7"/>
+                  <circle cx="200" cy="200" r="30" fill="#ffffff" opacity="0.4"/>
+                  <g class="sparkle">
+                    <circle cx="160" cy="160" r="5" fill="#fbbf24"/>
+                    <circle cx="240" cy="240" r="5" fill="#fbbf24"/>
+                    <circle cx="230" cy="170" r="4" fill="#fef3c7"/>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="candy-content-side">
+            <div class="section-badge"><i class="fas fa-star"></i> Fan Favourite</div>
+            <h3>Bubblegum Coated Fruits</h3>
+            <p>Double-layered sour and sweet bubblegum coating for an unforgettable flavour explosion. The ultimate treat for bubblegum lovers.</p>
+            <a href="#products" class="cta-view-products" onclick="setFilter('bubblegum-coated'); setTimeout(() => { const el = document.getElementById('products'); if (el) el.scrollIntoView({behavior: 'smooth'}); }, 100); return false;">
+              <span>Shop Bubblegum Fruits</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Slide 3: Custom Bowls - FLOAT & GLOW ANIMATION -->
+      <div class="swiper-slide slide-3">
+        <div class="slide-content-wrapper">
+          <div class="candy-visual-side">
+            <div class="float-bowl">
+              <div class="glow-ring"></div>
+              <svg class="candy-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="goldGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#fbbf24;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                  </linearGradient>
+                  <filter id="glow3" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="10" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+                <g filter="url(#glow3)">
+                  <path d="M 100 200 Q 100 300 200 300 Q 300 300 300 200 Z" fill="url(#goldGrad3)" opacity="0.9"/>
+                  <circle cx="160" cy="180" r="30" fill="#ef4444"/>
+                  <circle cx="200" cy="160" r="35" fill="#3b82f6"/>
+                  <circle cx="240" cy="180" r="30" fill="#10b981"/>
+                  <path d="M 150 140 L 250 140 L 230 120 L 170 120 Z" fill="#fbbf24"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class="candy-content-side">
+            <div class="section-badge"><i class="fas fa-gift"></i> Custom Orders</div>
+            <h3>Custom Mixed Bowls</h3>
+            <p>Can't decide? Get a mix of all our signature flavours. Colors are customizable to your suitings for parties, events, and gifts!</p>
+            <a href="#products" class="cta-view-products" onclick="setFilter('custom-bowls'); setTimeout(() => { const el = document.getElementById('products'); if (el) el.scrollIntoView({behavior: 'smooth'}); }, 100); return false;">
+              <span>Shop Custom Bowls</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
 </section>
 <!-- ========== WORLD-CLASS CUSTOM BOX BUILDER (MULTI-BOX) ========== -->
 <section class="premium-box-builder" id="box-builder">
